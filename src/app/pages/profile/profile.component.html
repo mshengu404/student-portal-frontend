@@ -1,0 +1,25 @@
+<ng-container *ngIf="user">
+  <div class="container profile-view">
+
+    <div class="profile-details">
+      <div class="detail">
+        <label>Full Name:</label>
+        <p>{{user.firstName}} {{user.lastName}}</p>
+      </div>
+      <div class="detail">
+        <label>Email:</label>
+        <p>{{user.email}}</p>
+      </div>
+      <!-- <div class="detail">
+        <label>Phone:</label>
+        <p>+1 234 567 890</p>
+      </div> -->
+    </div>
+    <!-- <div class="profile-actions"> -->
+      <!-- <button class="button edit-button">Edit Profile</button> -->
+      <button class="button logout-button" (click)="logout()">Logout</button>
+    <!-- </div> -->
+  </div>
+</ng-container>
+
+<app-loader [isLoaderVisible]="isLoaderVisible"></app-loader>

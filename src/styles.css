@@ -1,1 +1,504 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #009579;
+}
+.container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 430px;
+  width: 100%;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+.container .registration{
+  display: block;
+}
+
+#check:checked ~ .registration{
+  display: block;
+}
+
+#check:checked ~ .login{
+  display: none;
+}
+
+#check{
+  display: none;
+}
+
+.container .form{
+  padding: 2rem;
+}
+
+.form header{
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+ .form input{
+   height: 60px;
+   width: 100%;
+   padding: 0 15px;
+   font-size: 17px;
+   margin-bottom: 1.3rem;
+   border: 1px solid #ddd;
+   border-radius: 6px;
+   outline: none;
+ }
+ .form input:focus{
+   box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+ }
+.form a{
+  font-size: 16px;
+  color: #009579;
+  text-decoration: none;
+}
+.form a:hover{
+  text-decoration: underline;
+}
+.form input.button{
+  color: #fff;
+  background: #009579;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-top: 1.7rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.form input.button:hover{
+  background: #006653;
+}
+.signup{
+  font-size: 17px;
+  text-align: center;
+}
+.signup label{
+  color: #009579;
+  cursor: pointer;
+}
+.signup label:hover{
+  text-decoration: underline;
+}
+
+/* Profile View Container */
+.container.profile-view {
+  max-width: 500px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Profile Header */
+.profile-header {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.profile-header .profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #009579;
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+}
+
+.profile-header .profile-pic:hover {
+  transform: scale(1.1);
+}
+
+.profile-header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 0.5rem;
+}
+
+.profile-header .welcome {
+  font-size: 1rem;
+  color: #666666;
+}
+
+/* Profile Details */
+.profile-details {
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.profile-details .detail {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-details label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555555;
+  flex: 1;
+}
+
+.profile-details p {
+  font-size: 1rem;
+  color: #333333;
+  margin: 0;
+  flex: 2;
+  text-align: right;
+}
+
+/* Profile Actions */
+.profile-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-actions .button {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.profile-actions .button:hover {
+  transform: scale(1.05);
+}
+
+.edit-button {
+  background: linear-gradient(135deg, #009579, #00c9a7);
+}
+
+.edit-button:hover {
+  background: linear-gradient(135deg, #00c9a7, #009579);
+}
+
+.logout-button {
+  background: linear-gradient(135deg, #e63946, #ff5c5c);
+}
+
+.logout-button:hover {
+  background: linear-gradient(135deg, #ff5c5c, #e63946);
+}
+
+
+/* Form Control Error Styling */
+.form .error {
+  margin-top: -10px; /* Reduce gap between input and error message */
+  margin-bottom: 15px; /* Provide space for the next input */
+  font-size: 0.85rem;
+  color: #e63946;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between icon and text */
+}
+
+.form .error small {
+  margin: 0; /* Remove extra margins */
+}
+
+/* Error Icon */
+.form .error-icon {
+  font-size: 1rem;
+  color: #e63946;
+}
+
+
+/* Button Styling (Non-input Type) */
+button.button {
+  color: #ffffff;
+  background: #009579;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 0.8rem 2rem; /* Add padding for better button appearance */
+  border: none; /* Remove default border */
+  border-radius: 6px; /* Rounded corners */
+  cursor: pointer;
+  transition: background 0.4s, transform 0.2s;
+}
+
+button.button:hover {
+  background: #006653;
+  transform: scale(1.05); /* Slightly increase the size for hover effect */
+}
+
+button.button:disabled {
+  background: #cccccc; /* Gray background for disabled state */
+  cursor: not-allowed; /* Change cursor to indicate non-interaction */
+}
+
+/* Additional Styling for Buttons in Specific Containers */
+.container .form button.button {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%; /* Full width button for form submission */
+}
+
+/* Profile Actions for Non-input Buttons */
+.profile-actions button {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.profile-actions button:hover {
+  transform: scale(1.05);
+}
+
+button.edit-button {
+  background: linear-gradient(135deg, #009579, #00c9a7);
+}
+
+button.edit-button:hover {
+  background: linear-gradient(135deg, #00c9a7, #009579);
+}
+
+button.logout-button {
+  background: linear-gradient(135deg, #e63946, #ff5c5c);
+}
+
+button.logout-button:hover {
+  background: linear-gradient(135deg, #ff5c5c, #e63946);
+}
+
+
+  /* OTP Form Styling */
+  .otp.form {
+    padding: 2rem;
+  }
+  
+  .otp.form .instruction {
+    font-size: 1rem;
+    color: #666666;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .otp.form .otp-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .otp.form .otp-inputs input {
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    font-size: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    transition: box-shadow 0.3s;
+  }
+  
+  .otp.form .otp-inputs input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .otp.form .resend {
+    font-size: 1rem;
+    color: #009579;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .otp.form .resend a {
+    color: #009579;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .otp.form .resend a:hover {
+    text-decoration: underline;
+  }
+  
+
+  /* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+/* Show Modal */
+.modal-overlay.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Modal Container */
+.modal-container {
+  background: #fff;
+  width: 90%;
+  max-width: 500px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: modalSlideIn 0.3s ease-in-out;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-header .close-button {
+  font-size: 1.5rem;
+  color: #666;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.modal-header .close-button:hover {
+  color: #009579;
+}
+
+/* Modal Content */
+.modal-content {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* Spinner Container */
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+/* Show Spinner */
+.spinner-container.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Spinner Animation */
+.spinner {
+  border: 8px solid #f3f3f3; /* Light gray background */
+  border-top: 8px solid #009579; /* Green border for the rotating part */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+/* Error Modal Header Color */
+.modal-header.error h2 {
+  color: #ff4d4d; /* Red color for error */
+}
+
+.modal-header.error .close-button {
+  color: #ff4d4d; /* Red for the close button */
+}
+
+/* Modal Content */
+.modal-content {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Error Modal Content Color */
+.modal-content.error {
+  color: #ff4d4d; /* Red color for error message */
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Error Button Style */
+.modal-actions .button.error-button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-actions .button.error-button:hover {
+  background: #e03e3e;
+}
+
+/* Spinner Rotation Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

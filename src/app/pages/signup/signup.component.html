@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="registration form">
+        <header>Signup</header>
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+            <!-- First Name -->
+            <input type="text" placeholder="Enter your first name" formControlName="firstName"
+                aria-describedby="firstNameError" />
+            <div *ngIf="signUpForm.get('firstName')?.touched && signUpForm.get('firstName')?.invalid" class="error"
+                id="firstNameError" aria-live="polite">
+                <!-- <span class="error-icon">⚠️</span> -->
+                <small *ngIf="signUpForm.get('firstName')?.errors?.['required']">First name is required.</small>
+            </div>
+
+            <!-- Last Name -->
+            <input type="text" placeholder="Enter your last name" formControlName="lastName"
+                aria-describedby="lastNameError" />
+            <div *ngIf="signUpForm.get('lastName')?.touched && signUpForm.get('lastName')?.invalid" class="error"
+                id="lastNameError" aria-live="polite">
+                <!-- <span class="error-icon">⚠️</span> -->
+                <small *ngIf="signUpForm.get('lastName')?.errors?.['required']">Last name is required.</small>
+            </div>
+
+            <!-- Email -->
+            <input type="text" placeholder="Enter your email" formControlName="email" aria-describedby="emailError" />
+            <div *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.invalid" class="error"
+                id="emailError" aria-live="polite">
+                <!-- <span class="error-icon">⚠️</span> -->
+                <small *ngIf="signUpForm.get('email')?.errors?.['required']">Email is required.</small>
+                <small *ngIf="signUpForm.get('email')?.errors?.['email']">Invalid email format.</small>
+            </div>
+
+            <!-- Password -->
+            <input type="password" placeholder="Create a password" formControlName="password"
+                aria-describedby="passwordError" />
+            <div *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.invalid" class="error"
+                id="passwordError" aria-live="polite">
+                <!-- <span class="error-icon">⚠️</span> -->
+                <small *ngIf="signUpForm.get('password')?.errors?.['required']">Password is required.</small>
+                <small *ngIf="signUpForm.get('password')?.errors?.['minlength']">Password must be at least 8
+                    characters.</small>
+            </div>
+
+            <!-- Confirm Password -->
+            <input type="password" placeholder="Confirm your password" formControlName="confirmPassword"
+                aria-describedby="confirmPasswordError" />
+            <div *ngIf="signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.invalid"
+                class="error" id="confirmPasswordError" aria-live="polite">
+                <!-- <span class="error-icon">⚠️</span> -->
+                <small *ngIf="signUpForm.get('confirmPassword')?.errors?.['required']">Confirm password is
+                    required.</small>
+            </div>
+
+            <!-- Password Mismatch -->
+            <div *ngIf="signUpForm.hasError('passwordMismatch')" class="error" aria-live="polite">
+                <!-- <span class="error-icon">⚠️</span> -->
+                <small>Passwords do not match.</small>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="button" [disabled]="signUpForm.invalid" type="submit">Signup</button>
+        </form>
+
+        <div class="signup">
+            <span>Already have an account? <a routerLink="/">Login</a></span>
+        </div>
+    </div>
+</div>
+
+<app-loader [isLoaderVisible]="isLoaderVisible"></app-loader>
+
+<app-modal [modalMessage]="modalMessage" [isModalVisible]="isModalVisible" (emitCloseModal)="closeModal()"></app-modal>

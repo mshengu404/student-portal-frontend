@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="login form">
+    <header>Login</header>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <input type="text" placeholder="Enter your email" formControlName="email" aria-describedby="emailError" />
+      <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error" id="emailError"
+        aria-live="polite">
+        <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+      </div>
+      <input type="password" placeholder="Create a password" formControlName="password"
+        aria-describedby="passwordError" />
+      <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error"
+        id="passwordError" aria-live="polite">
+        <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+        <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8
+          characters.</small>
+      </div>
+      <a routerLink="/reset-password">Forgot password?</a>
+      <button class="button" [disabled]="loginForm.invalid" type="submit">login</button>
+    </form>
+    <div class="signup">
+      <span class="signup">Don't have an account?
+        <label for="check"><a routerLink="/register">Signup</a></label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<app-loader [isLoaderVisible]="isLoaderVisible"></app-loader>
+
+<app-modal [modalMessage]="modalMessage" [isModalVisible]="isModalVisible" (emitCloseModal)="closeModal()"></app-modal>

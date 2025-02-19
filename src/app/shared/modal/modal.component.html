@@ -1,0 +1,11 @@
+<div class="modal-overlay" [ngClass]="{'show': isModalVisible}" id="modal">
+    <div class="modal-container">
+        <header class="modal-header">
+        </header>
+        <div class="modal-content">
+            <p>{{modalMessage}}</p>
+        </div>
+
+        <button class="button" (click)="emitCloseModal.emit()" type="submit">Close</button>
+    </div>
+</div>
