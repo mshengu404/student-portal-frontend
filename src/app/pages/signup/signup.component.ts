@@ -44,7 +44,6 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.authService.redirectIfLoggedIn();
-
     this.signUpForm = new FormGroup(
       {
         email: new FormControl(null, [Validators.required, Validators.email]),

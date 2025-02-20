@@ -44,13 +44,11 @@ export class UpdatePasswordComponent {
 
   ngOnInit() {
     this.authService.redirectIfLoggedIn();
-
     this.activatedRoute.params.subscribe({
       next: (params) => {
         this.email = params['email'];
       },
     });
-
     this.updatePasswordForm = new FormGroup(
       {
         password: new FormControl(null, [

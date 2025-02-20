@@ -12,7 +12,6 @@ import { UserService } from '../../service/user/user.service';
 import { User } from '../../interface/user.interface';
 import { AuthService } from '../../service/auth/auth.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
-
 @Component({
   standalone: true,
   selector: 'app-otp',
@@ -28,6 +27,8 @@ export class OtpComponent {
   invalidOtp = false;
   type!: string;
   isLoaderVisible: boolean = false;
+  modalMessage = '';
+  isModalVisible = false;
 
   constructor(
     private fb: FormBuilder,
@@ -41,14 +42,12 @@ export class OtpComponent {
   ngOnInit() {
     this.isLoaderVisible = true;
     this.authService.redirectIfLoggedIn();
-
     this.otpForm = this.fb.group({
       digit1: ['', [Validators.required, Validators.pattern('[0-9]')]],
       digit2: ['', [Validators.required, Validators.pattern('[0-9]')]],
       digit3: ['', [Validators.required, Validators.pattern('[0-9]')]],
       digit4: ['', [Validators.required, Validators.pattern('[0-9]')]],
     });
-
     this.activatedRoute.params.subscribe({
       next: (params) => {
         this.type = params['type'];
@@ -60,10 +59,14 @@ export class OtpComponent {
 
   getUserProfileById(id: number) {
     this.userService.getProfile(id).subscribe({
-      next: (user: User) => (
-        (this.user = user), (this.isLoaderVisible = false)
-      ),
-      error: () => (this.isLoaderVisible = false),
+      next: (user: User) => {
+        this.user = user;
+        this.isLoaderVisible = false;
+      },
+      error: () => {
+        this.isLoaderVisible = false;
+        this.showErrorModal('Failed to load user profile. Please try again.');
+      },
     });
   }
 
@@ -73,7 +76,6 @@ export class OtpComponent {
     nextField: string | null
   ): void {
     const input = event.target as HTMLInputElement;
-
     if (input.value.length === 1 && nextField) {
       document
         .querySelector<HTMLInputElement>(
@@ -81,7 +83,6 @@ export class OtpComponent {
         )
         ?.focus();
     }
-
     if (event.key === 'Backspace' && !input.value) {
       const previousField = this.getPreviousField(currentField);
       if (previousField) {
@@ -123,9 +124,13 @@ export class OtpComponent {
             }
           } else {
             this.invalidOtp = true;
+            this.showErrorModal('Invalid OTP. Please try again.');
           }
         },
-        error: (err) => (this.isLoaderVisible = false),
+        error: (err) => {
+          this.isLoaderVisible = false;
+          this.showErrorModal('An error occurred. Please try again.');
+        },
       });
     }
   }
@@ -133,15 +138,20 @@ export class OtpComponent {
   resendOtp(): void {
     this.isLoaderVisible = true;
     this.otpService.sendOtp(this.user.email).subscribe({
-      next: () => (this.isLoaderVisible = false),
-      error: (err) => (this.isLoaderVisible = false),
+      next: () => {
+        this.isLoaderVisible = false;
+        this.showErrorModal('OTP resent successfully.');
+      },
+      error: (err) => {
+        this.isLoaderVisible = false;
+        this.showErrorModal('Failed to resend OTP. Please try again.');
+      },
     });
   }
 
   handlePaste(event: ClipboardEvent): void {
     event.preventDefault();
     const clipboardData = event.clipboardData?.getData('text')?.trim();
-
     if (clipboardData && /^[0-9]{4}$/.test(clipboardData)) {
       const otpValues = clipboardData.split('');
       this.otpForm.patchValue({
@@ -151,5 +161,14 @@ export class OtpComponent {
         digit4: otpValues[3],
       });
     }
+  }
+
+  private showErrorModal(message: string) {
+    this.modalMessage = message;
+    this.isModalVisible = true;
+  }
+
+  closeModal() {
+    this.isModalVisible = false;
   }
 }

@@ -54,27 +54,37 @@ export class LoginComponent implements OnInit {
     this.isModalVisible = false;
   }
 
+  private showErrorModal(message: string) {
+    this.modalMessage = message;
+    this.isModalVisible = true;
+  }
+
   login() {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.showErrorModal('Please fill out the form correctly.');
+      return;
+    }
+
     this.isLoaderVisible = true;
 
     this.userService.login(this.loginForm.value).subscribe({
       next: (response) => {
         if (response?.success) {
-          this.isLoaderVisible = true;
           localStorage.setItem('token', response.token);
           this.router.navigate(['/verify', response.user.id, 'login']);
         } else {
-          this.isLoaderVisible = false;
-          this.isModalVisible = true;
-          this.modalMessage = `User with email ${this.loginForm.value.email} not found`;
+          this.showErrorModal(`User with email ${this.loginForm.value.email} not found.`);
         }
       },
       error: (err) => {
-        this.isLoaderVisible = false;
-        this.isModalVisible = true;
-        this.modalMessage = `User with email ${this.loginForm.value.email} not found`;
+        const errorMessage = err.status === 404 
+          ? `User with email ${this.loginForm.value.email} not found.` 
+          : 'An error occurred. Please try again later.';
+        this.showErrorModal(errorMessage);
       },
+      complete: () => {
+        this.isLoaderVisible = false;
+      }
     });
   }
 }

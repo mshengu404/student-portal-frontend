@@ -35,7 +35,6 @@ export class ResetPasswordComponent {
   ) {}
   ngOnInit() {
     this.authService.redirectIfLoggedIn();
-
     this.resetPasswordForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
     });

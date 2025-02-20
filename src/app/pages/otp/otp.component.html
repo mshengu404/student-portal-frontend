@@ -5,7 +5,6 @@
             <p class="instruction" *ngIf="user">
                 Please enter the 4-digit OTP sent to your email <strong>{{ hideEmail(user.email) }}</strong>.
             </p>
-
             <div class="otp-inputs">
                 <input type="text" maxlength="1" formControlName="digit1"
                     (keydown)="moveToNext($event, 'digit1', 'digit2')" (paste)="handlePaste($event)" />
@@ -16,22 +15,17 @@
                 <input type="text" maxlength="1" formControlName="digit4" (keydown)="moveToNext($event, 'digit4', '')"
                     (paste)="handlePaste($event)" />
             </div>
-
             <div *ngIf="otpForm.invalid && otpForm.touched" class="error">
                 <small>Please enter all 4 digits of the OTP.</small>
             </div>
-
             <div *ngIf="invalidOtp" class="error">
                 <small>Invalid OTP pin provided.</small>
             </div>
-
             <div class="resend">
                 Didn't receive the OTP? <label for="check"><a (click)="resendOtp()">Resend</a></label>
             </div>
-            
             <button class="button" [disabled]="otpForm.invalid" type="submit">Verify</button>
         </form>
     </div>
 </div>
-
 <app-loader [isLoaderVisible]="isLoaderVisible"></app-loader>
